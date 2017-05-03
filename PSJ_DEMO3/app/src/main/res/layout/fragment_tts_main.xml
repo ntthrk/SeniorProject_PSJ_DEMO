@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.finalproject.ntthrk_win.psj_demo.TTS_mainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="กรุณาลากนิ้วเป็นสัญลักษณ์บนหน้าจอ"
+            android:layout_centerInParent="true" />
+        <android.gesture.GestureOverlayView
+            android:id="@+id/gestures_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gestureStrokeType="multiple" />
+        <Button
+            android:id="@+id/symbolConfirm_button"
+            android:text="ยืนยัน"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="arrSearch">
+        <item>เพิ่มล่าสุด</item>
+        <item>ใช้งานบ่อย</item>
+    </array>
+</resources>
