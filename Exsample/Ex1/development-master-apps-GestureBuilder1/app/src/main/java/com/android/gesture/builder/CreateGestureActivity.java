@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.MotionEvent;
 import android.gesture.GestureOverlayView;
@@ -92,6 +93,7 @@ public class CreateGestureActivity extends Activity {
 
             final GestureLibrary store = GestureBuilderActivity.getStore();
             store.addGesture(name.toString(), mGesture);
+            Log.e("Gesture",mGesture.toString());
             store.save();
 
             setResult(RESULT_OK);
@@ -99,6 +101,7 @@ public class CreateGestureActivity extends Activity {
             final String path = new File(Environment.getExternalStorageDirectory(),
                     "gestures").getAbsolutePath();
             Toast.makeText(this, getString(R.string.save_success, path), Toast.LENGTH_LONG).show();
+            Log.e("path",path);
         } else {
             setResult(RESULT_CANCELED);
         }

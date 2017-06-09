@@ -322,6 +322,7 @@ out:        for (String name : entries) {
         adapter.notifyDataSetChanged();
 
         Toast.makeText(this, R.string.gestures_delete_success, Toast.LENGTH_SHORT).show();
+
     }
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)

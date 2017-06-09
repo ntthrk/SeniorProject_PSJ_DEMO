@@ -11,6 +11,7 @@ import android.os.Environment;
 
 public class GestureManagement extends MyGesture {
     private GestureLibrary mGestureLibrary;
+
     private boolean mDrawningStatus ;
     private Gesture mGesture;
     private String mNameGesture;
@@ -19,6 +20,7 @@ public class GestureManagement extends MyGesture {
     public GestureManagement(Gesture gesture, String gestname) {
         super(gesture, gestname);
     }
+
 
     private void saveGesture(){
         if(mGestureLibrary == null){

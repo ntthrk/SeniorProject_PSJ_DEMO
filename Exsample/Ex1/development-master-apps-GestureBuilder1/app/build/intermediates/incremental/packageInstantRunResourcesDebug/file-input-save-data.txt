@@ -1,0 +1,30 @@
+#Internal package file, do not edit.
+#Wed Jun 07 19:44:17 ICT 2017
+2.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+5.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/layout/dialog_rename.xml
+5.set=ANDROID_RESOURCE
+3.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+6.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/resources.arsc
+2.set=ANDROID_RESOURCE
+4.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+7.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/drawable-hdpi-v4/ic_gesturebuilder.png
+7.set=ANDROID_RESOURCE
+count=9
+0.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/layout/gestures_list.xml
+5.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+8.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/AndroidManifest.xml
+4.set=ANDROID_RESOURCE
+6.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+1.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/layout/create_gesture.xml
+1.set=ANDROID_RESOURCE
+7.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+2.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/layout-v4/create_gesture.xml
+6.set=ANDROID_RESOURCE
+0.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+8.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+3.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/layout/gestures_item.xml
+3.set=ANDROID_RESOURCE
+1.base=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_
+4.file=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/res/resources-debug.ap_/res/layout-v4/gestures_list.xml
+8.set=ANDROID_RESOURCE
+0.set=ANDROID_RESOURCE

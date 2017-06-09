@@ -1,4 +1,7 @@
-#Sat Apr 08 11:54:59 ICT 2017
-base.0=/home/ntthrk/Documents/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Wed Jun 07 19:44:48 ICT 2017
+base.0=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4c0fb8f8beac8eeac65671dde88caa57e8fec9ee
+renamed.1=classes2.dex
 renamed.0=classes.dex
-file.0=/home/ntthrk/Documents/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.1=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_8366120e629301f33f942a992c999d71dec74f78/classes.dex
+base.1=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_8366120e629301f33f942a992c999d71dec74f78
+file.0=/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4c0fb8f8beac8eeac65671dde88caa57e8fec9ee/classes.dex

@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,15 +24,15 @@ import static android.R.attr.name;
 
 
 public class MEMO_gestureManagementFragment extends Fragment {
+    private static final float LENGTH_THRESHOLD = 120.0f;
     private Button nextBT;
     private Button backBT;
-    private String groupNameGest;
-
     private Gesture mGesture;
+    private MyGesture myGesture;
 
 
-    public MEMO_gestureManagementFragment(String groupNameGest) {
-        this.groupNameGest = groupNameGest;
+    public MEMO_gestureManagementFragment() {
+
 
     }
 
@@ -46,7 +47,13 @@ public class MEMO_gestureManagementFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e("msg" , groupNameGest);
+
+        myGesture = new MyGesture();
+
+        Log.e("nameGesture" , myGesture.getGestureName() );
+
+        GestureOverlayView overlay = (GestureOverlayView) View.findViewById(R.id.gestures_overlay);
+        overlay.addOnGestureListener(new  GesturesProcessor());
 
         nextBT = (Button) view.findViewById(R.id.next_TV);
         nextBT.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +76,41 @@ public class MEMO_gestureManagementFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if(mGesture != null){
+            outState.putParcelable("gesture" , mGesture);
+        }
+    }
+
+    private class GesturesProcessor implements GestureOverlayView.OnGestureListener {
 
 
+        @Override
+        public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
+            nextBT.setEnabled(false);
+            mGesture = null;
+        }
+
+        @Override
+        public void onGesture(GestureOverlayView overlay, MotionEvent event) {
+
+        }
+
+        @Override
+        public void onGestureEnded(GestureOverlayView overlay, MotionEvent event) {
+            mGesture = overlay.getGesture();
+            if(mGesture.getLength() < LENGTH_THRESHOLD){
+                overlay.clear(false);
+            }
+            nextBT.setEnabled(true);
+        }
+
+        @Override
+        public void onGestureCancelled(GestureOverlayView overlay, MotionEvent event) {
+
+        }
+    }
 }

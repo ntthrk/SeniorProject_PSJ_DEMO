@@ -29,25 +29,33 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
 
+
         <LinearLayout
+            android:id="@+id/mLayout"
             android:orientation="vertical"
             android:layout_weight="4"
             android:layout_width="match_parent"
             android:layout_height="0dp">
-            <EditText
+            <!--EditText
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
+                android:layout_height="wrap_content"></EditText-->
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton"
+            <!--android.support.design.widget.FloatingActionButton
+                android:id="@+id/plusActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 app:fabSize="mini"
                 android:layout_gravity="center"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                app:srcCompat="@android:drawable/ic_menu_add" /-->
+
 
         </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="เพิ่ม" />
         <Button
             android:id="@+id/next_TV"
             android:text="ถัดไป"

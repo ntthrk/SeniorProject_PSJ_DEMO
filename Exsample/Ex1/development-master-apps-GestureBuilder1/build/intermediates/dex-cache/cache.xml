@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4c0fb8f8beac8eeac65671dde88caa57e8fec9ee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4eafd8b405ee34b66a4c039a32bc49315235560b">
+        <dex dex="/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex1/development-master-apps-GestureBuilder1/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_8366120e629301f33f942a992c999d71dec74f78/classes.dex" />
+    </item>
+
+</items>
