@@ -3,9 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <TextView
+        android:id="@+id/txtGesture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"/>
+        android:layout_weight="1"
+        android:gravity="left"
+        android:padding="8dp"
+        android:text="ข้อความ"
+        android:textSize="18sp"
+    />
+
+    <Button
+        android:id="@+id/removeBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:text="ลบ" />
 
 </LinearLayout>

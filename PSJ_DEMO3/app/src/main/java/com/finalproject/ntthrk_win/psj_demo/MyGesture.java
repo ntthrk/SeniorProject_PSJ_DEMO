@@ -10,7 +10,9 @@ public class MyGesture {
     private static String detailGesture;
     private static ArrayList<String> textGesture;
 
-    public MyGesture(){}
+    public MyGesture(){
+
+    }
 
     public MyGesture(Gesture gesture, String gestname){
         this.gesture = gesture;

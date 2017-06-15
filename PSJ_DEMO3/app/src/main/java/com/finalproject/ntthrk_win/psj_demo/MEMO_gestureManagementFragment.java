@@ -29,12 +29,7 @@ public class MEMO_gestureManagementFragment extends Fragment {
     private Button backBT;
     private Gesture mGesture;
     private MyGesture myGesture;
-
-
-    public MEMO_gestureManagementFragment() {
-
-
-    }
+    private GestureOverlayView overlay;
 
 
     @Override
@@ -52,7 +47,7 @@ public class MEMO_gestureManagementFragment extends Fragment {
 
         Log.e("nameGesture" , myGesture.getGestureName() );
 
-        GestureOverlayView overlay = (GestureOverlayView) View.findViewById(R.id.gestures_overlay);
+        overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
         overlay.addOnGestureListener(new  GesturesProcessor());
 
         nextBT = (Button) view.findViewById(R.id.next_TV);
