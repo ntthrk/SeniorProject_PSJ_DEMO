@@ -13,8 +13,6 @@ public class GestureManagement extends MyGesture {
     private GestureLibrary mGestureLibrary;
 
     private boolean mDrawningStatus ;
-    private Gesture mGesture;
-    private String mNameGesture;
 
     private File pathFile = new File(Environment.getExternalStorageDirectory() , "gesturePSJ");
     public GestureManagement(Gesture gesture, String gestname) {

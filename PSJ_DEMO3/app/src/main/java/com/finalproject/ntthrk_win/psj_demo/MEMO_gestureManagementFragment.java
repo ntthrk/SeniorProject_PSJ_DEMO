@@ -45,8 +45,6 @@ public class MEMO_gestureManagementFragment extends Fragment {
 
         myGesture = new MyGesture();
 
-        Log.e("nameGesture" , myGesture.getGestureName() );
-
         overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
         overlay.addOnGestureListener(new  GesturesProcessor());
 
@@ -54,7 +52,7 @@ public class MEMO_gestureManagementFragment extends Fragment {
         nextBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.i("Gesture" , overlay.toString() );
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content, new MEMO_detailFragment()).commit();
             }
