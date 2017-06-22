@@ -5,10 +5,10 @@ import android.gesture.Gesture;
 import java.util.ArrayList;
 
 public class MyGesture {
-    private static Gesture gesture;
-    private static String gestureName;
-    private static String detailGesture;
-    private static ArrayList<String> textGesture;
+    protected static Gesture gesture;
+    protected static String gestureName;
+    protected static String detailGesture;
+    protected static ArrayList<String> textGesture;
 
     public MyGesture(){
 

@@ -20,7 +20,7 @@ public class GestureManagement extends MyGesture {
     }
 
 
-    private void saveGesture(){
+    private void saveGesture(String mNameGesture ,Gesture mGesture){
         if(mGestureLibrary == null){
             mGestureLibrary = GestureLibraries.fromFile(pathFile);
         }
@@ -30,7 +30,7 @@ public class GestureManagement extends MyGesture {
 
     }
 
-    private void resetDrawGesture(){
+    private void resetDrawGesture(String mNameGesture,Gesture mGesture){
 
         mGestureLibrary.addGesture(mNameGesture, mGesture);
 

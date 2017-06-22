@@ -1,5 +1,6 @@
 package com.finalproject.ntthrk_win.psj_demo;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GesturesDBHelper gDB = new GesturesDBHelper(getApplicationContext());
+
     }
 
     @Override

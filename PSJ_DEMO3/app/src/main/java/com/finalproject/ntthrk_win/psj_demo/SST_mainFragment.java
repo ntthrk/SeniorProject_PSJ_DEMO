@@ -24,7 +24,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class SST_mainFragment extends Fragment {
 
-    private TextView voiceInput;
+    private TextView voiceText;
     private android.support.design.widget.FloatingActionButton talkButton;
     private android.support.design.widget.FloatingActionButton resetButton;
     private final int REQUEST_VOIC_RECOGINITION = 10101;
@@ -32,7 +32,6 @@ public class SST_mainFragment extends Fragment {
     public SST_mainFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,9 +43,9 @@ public class SST_mainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        voiceInput = (TextView) view.findViewById(R.id.textShow);
-        talkButton = (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.talk_Button);
+        voiceText = (TextView) view.findViewById(R.id.textShow);
 
+        talkButton = (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.talk_Button);
         talkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,11 +54,10 @@ public class SST_mainFragment extends Fragment {
         });
 
         resetButton = (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.reset_Button);
-
         resetButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                voiceInput.setText("Show Text");
+                voiceText.setText("Show Text");
             }
         });
     }
@@ -89,7 +87,7 @@ public class SST_mainFragment extends Fragment {
                 data != null) {
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String text = result.get(0);
-            voiceInput.setText(text);
+            voiceText.setText(text);
 
         }
     }
