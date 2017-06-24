@@ -13,6 +13,33 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
+        <TextView
+            android:id="@+id/name_smybol"
+            android:text="name Symbol"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <ImageView
+            android:id="@+id/image_symbol"
+            android:src="#ecece0"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/symbol_detail"
+            android:text="detail about smybol"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <ListView
+            android:id="@+id/text_list"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"></ListView>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_weight="1"
@@ -20,37 +47,18 @@
             android:layout_height="0dp"
             android:padding="5dp">
 
-            <TextView
-                android:text="name Symbol"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-
             <Button
+                android:id="@+id/delete_BT"
+                android:text="delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/edit_BT"
                 android:text="edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <ImageView
-            android:src="#ecece0"
-            android:layout_weight="4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <TextView
-            android:text="detail about smybol"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <ListView
-            android:layout_weight="4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"></ListView>
-
-
     </LinearLayout>
 
 

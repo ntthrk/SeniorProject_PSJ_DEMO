@@ -52,9 +52,36 @@ public class MEMO_gestureManagementFragment extends Fragment {
         nextBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Gesture" , overlay.toString() );
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new MEMO_detailFragment()).commit();
+
+                if (myGesture.getGestureName() != null) {
+                    GestureManagement gestureManagement = new GestureManagement();
+
+                    final CharSequence name = myGesture.getGestureName();
+                    if (name.length() == 0) {
+                        Log.i("Gesture","missing name");
+                        return;
+                    }
+                    Log.i("Gesture Name : ",myGesture.getGestureName());
+
+                    if(overlay.toString() != null ){
+                        gestureManagement.saveGesture(
+                                myGesture.getGestureName(), myGesture.getGesture(),
+                                myGesture.getDetailGesture(), myGesture.getTextGesture(),
+                                getActivity());
+                        Log.i("Gesture Overlay :" , overlay.toString() );
+                        myGesture = null;
+
+                        //next Page
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content, new MEMO_detailFragment()).commit();
+                    }else {
+                        Log.i("Gesture Overlay :" , "Null!!!" );
+                    }
+
+                } else {
+                   /* setResult(RESULT_CANCELED);*/
+                }
+
             }
         });
 
@@ -79,8 +106,6 @@ public class MEMO_gestureManagementFragment extends Fragment {
     }
 
     private class GesturesProcessor implements GestureOverlayView.OnGestureListener {
-
-
         @Override
         public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
             nextBT.setEnabled(false);
@@ -95,9 +120,11 @@ public class MEMO_gestureManagementFragment extends Fragment {
         @Override
         public void onGestureEnded(GestureOverlayView overlay, MotionEvent event) {
             mGesture = overlay.getGesture();
+
             if(mGesture.getLength() < LENGTH_THRESHOLD){
                 overlay.clear(false);
             }
+            myGesture.setGesture(mGesture);
             nextBT.setEnabled(true);
         }
 

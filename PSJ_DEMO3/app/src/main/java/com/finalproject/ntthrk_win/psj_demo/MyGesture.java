@@ -5,6 +5,7 @@ import android.gesture.Gesture;
 import java.util.ArrayList;
 
 public class MyGesture {
+    protected static String id;
     protected static Gesture gesture;
     protected static String gestureName;
     protected static String detailGesture;
@@ -13,6 +14,7 @@ public class MyGesture {
     public MyGesture(){
 
     }
+
 
     public MyGesture(Gesture gesture, String gestname){
         this.gesture = gesture;
@@ -24,6 +26,14 @@ public class MyGesture {
         this.gestureName = gestureName;
         this.detailGesture = detailGesture;
         this.textGesture = textGesture;
+    }
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        MyGesture.id = id;
     }
 
     public String getGestureName() {

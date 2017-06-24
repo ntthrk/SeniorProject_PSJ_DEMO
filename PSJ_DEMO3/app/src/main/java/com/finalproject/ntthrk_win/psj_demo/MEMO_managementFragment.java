@@ -93,10 +93,11 @@ public class MEMO_managementFragment extends Fragment {
                 myGesture.setTextGesture(textGestureArr);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content, new MEMO_gestureManagementFragment()).commit();
+
             }
         });
     }
-    public void addText(String text) {
+s    public void addText(String text) {
 
         if (text.isEmpty()) {
             Toast.makeText(getContext(), "กรุณาระบุข้อความ",
