@@ -57,7 +57,7 @@ public class SST_mainFragment extends Fragment {
         resetButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                voiceText.setText("Show Text");
+                voiceText.setText(" ");
             }
         });
     }
@@ -67,8 +67,7 @@ public class SST_mainFragment extends Fragment {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "th-TH");
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                "พูดที่นี่");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"พูดที่นี่");
         try{
             startActivityForResult(intent, REQUEST_VOIC_RECOGINITION);
         }catch (ActivityNotFoundException a){

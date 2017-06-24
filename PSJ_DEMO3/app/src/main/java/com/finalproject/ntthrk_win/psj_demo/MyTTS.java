@@ -22,7 +22,7 @@ public class MyTTS extends UtteranceProgressListener implements TextToSpeech.OnI
     private Locale locale = Locale.getDefault();
     private String enginePackageName;
     private String message;
-    private boolean isRunning;
+    private boolean isRunning = false;
     private int speakCount;
 
     public MyTTS(Context context) {

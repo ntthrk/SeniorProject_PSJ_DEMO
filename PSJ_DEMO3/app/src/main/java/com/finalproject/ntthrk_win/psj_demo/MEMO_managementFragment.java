@@ -97,7 +97,7 @@ public class MEMO_managementFragment extends Fragment {
             }
         });
     }
-s    public void addText(String text) {
+    public void addText(String text) {
 
         if (text.isEmpty()) {
             Toast.makeText(getContext(), "กรุณาระบุข้อความ",

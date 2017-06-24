@@ -78,7 +78,7 @@ public class GestureManagement  {
     private MyGesture getSmybolData(String symbolId,String mNameGesture, Gesture mGesture, FragmentActivity activity){
         gesturesDBHelper = new GesturesDBHelper(activity.getBaseContext());
         MyGesture myGesture = gesturesDBHelper.getValues(symbolId);
-        myGesture.setGesture( mGestureLibrary.getGestures(mNameGesture) );
+       // myGesture.setGesture( mGestureLibrary.getGestures(mNameGesture) );
         return myGesture;
     }
     private boolean deleteGesture(String symbolId,String mNameGesture, Gesture mGesture, FragmentActivity activity){
