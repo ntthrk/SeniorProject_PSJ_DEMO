@@ -1,10 +1,18 @@
 [
     {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/menu/gesture_item_options.xml",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/menu/gesture_item_options.xml"
+    },
+    {
         "merged": "/home/ntthrk/Documents/GestureBuilder/app/build/intermediates/res/merged/debug/menu/top_menu.xml",
         "source": "/home/ntthrk/Documents/GestureBuilder/app/src/main/res/menu/top_menu.xml"
     },
     {
         "merged": "/home/ntthrk/Documents/GestureBuilder/app/build/intermediates/res/merged/debug/menu/gesture_item_options.xml",
         "source": "/home/ntthrk/Documents/GestureBuilder/app/src/main/res/menu/gesture_item_options.xml"
+    },
+    {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/menu/top_menu.xml",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/menu/top_menu.xml"
     }
 ]

@@ -1,9 +1,12 @@
 package com.finalproject.ntthrk_win.psj_demo;
 
 
+import android.gesture.Gesture;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,18 +25,31 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class MEMO_detailFragment extends Fragment {
-    private TextView NameSymbol;
-    private ImageView SymbolImage;
-    private TextView symbolDetail;
-    private ListView textList;
+
+    private TextView NameSymbolTV;
+    private ImageView SymbolImageIV;
+    private TextView symbolDetailTV;
+    private ListView textListLV;
     private Button deleteBT;
     private Button editBT;
 
     private MyGesture myGesture = new MyGesture();
-    //private ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.);
+    private ArrayAdapter<String> adapter ;
+    private GesturesDBHelper dbHelper;
+    //private GestureManagement gestureManagement;
 
-    public MEMO_detailFragment() {
+    private String idSymbol;
+    private String nameSymbol ;
+    private String detailSymbol;
+    private String [] txtList = {};
+
+    public MEMO_detailFragment(String idSymbol,String nameSymbol,String detailSymbol,String[] txtList) {
         // Required empty public constructor
+        this.idSymbol = idSymbol;
+        this.nameSymbol = nameSymbol;
+        this.detailSymbol = detailSymbol;
+        this.txtList = txtList;
+
     }
 
 
@@ -48,24 +64,26 @@ public class MEMO_detailFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        NameSymbol = (TextView) view.findViewById(R.id.name_smybol);
-        SymbolImage = (ImageView) view.findViewById((R.id.image_symbol));
-        symbolDetail = (TextView) view.findViewById(R.id.symbol_detail);
-        textList = (ListView) view.findViewById(R.id.text_list);
+        NameSymbolTV = (TextView) view.findViewById(R.id.name_smybol);
+        SymbolImageIV = (ImageView) view.findViewById((R.id.image_symbol));
+        symbolDetailTV = (TextView) view.findViewById(R.id.symbol_detail);
+        textListLV = (ListView) view.findViewById(R.id.text_list);
         deleteBT = (Button) view.findViewById(R.id.delete_BT);
         editBT = (Button) view.findViewById(R.id.edit_BT);
 
+        //dbHelper =  new GesturesDBHelper(getContext());
 
-        //dapter = new ArrayAdapter<String>(
-        // this,
-        // android.R.layout.simple_list_item_1,
-        // myGesture.getTextGesture().listIterator());
+        NameSymbolTV.setText(nameSymbol);
 
+        //SymbolImageIV
+
+        symbolDetailTV.setText(detailSymbol);
+
+        adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,txtList);
+        textListLV.setAdapter(adapter);
 
 
         //deleteRecord(symbolId);
-
-
 
     }
 }

@@ -1,7 +1,23 @@
 [
     {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/layout/save_gesture.xml",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/layout/save_gesture.xml"
+    },
+    {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/layout/gesture_list_item.xml",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/layout/gesture_list_item.xml"
+    },
+    {
         "merged": "/home/ntthrk/Documents/GestureBuilder/app/build/intermediates/res/merged/debug/layout/gestures_list.xml",
         "source": "/home/ntthrk/Documents/GestureBuilder/app/src/main/res/layout/gestures_list.xml"
+    },
+    {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/layout/main.xml",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/layout/main.xml"
+    },
+    {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/layout/gestures_list.xml",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/layout/gestures_list.xml"
     },
     {
         "merged": "/home/ntthrk/Documents/GestureBuilder/app/build/intermediates/res/merged/debug/layout/save_gesture.xml",

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static android.R.attr.fragment;
 import static android.R.attr.name;
@@ -54,6 +55,11 @@ public class MEMO_gestureManagementFragment extends Fragment {
             public void onClick(View v) {
 
                 if (myGesture.getGestureName() != null) {
+                    String id = null;
+                    String nameSymbol = null;
+                    String detailSymbol = null;
+                    String[] txtList = {};
+
                     GestureManagement gestureManagement = new GestureManagement();
 
                     final CharSequence name = myGesture.getGestureName();
@@ -64,16 +70,22 @@ public class MEMO_gestureManagementFragment extends Fragment {
                     Log.i("Gesture Name : ",myGesture.getGestureName());
 
                     if(overlay.toString() != null ){
-                        gestureManagement.saveGesture(
+                        id = gestureManagement.saveGesture(
                                 myGesture.getGestureName(), myGesture.getGesture(),
                                 myGesture.getDetailGesture(), myGesture.getTextGesture(),
                                 getActivity());
                         Log.i("Gesture Overlay :" , overlay.toString() );
+                        if(id != null){
+                            nameSymbol = myGesture.getGestureName();
+                            detailSymbol = myGesture.getDetailGesture();
+                            txtList = myGesture.getTextGesture().toArray(new String [0]);
+                        }
+
                         myGesture = null;
 
                         //next Page
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content, new MEMO_detailFragment()).commit();
+                                .replace(R.id.content, new MEMO_detailFragment(id,nameSymbol,detailSymbol,txtList)).commit();
                     }else {
                         Log.i("Gesture Overlay :" , "Null!!!" );
                     }

@@ -55,8 +55,8 @@ public class TTS_textShowFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MyTTS.getInstance(getContext())
-//                      .setEngine("com.google.android.tts")​
-                        .setLocale(new Locale("th"))
+                     //.setEngine("com.google.android.tts")​
+                      .setLocale(new Locale("th"))
                         .speak(txtText);
             }
         });

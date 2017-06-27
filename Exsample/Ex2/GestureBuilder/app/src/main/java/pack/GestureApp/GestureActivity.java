@@ -19,6 +19,7 @@ public class GestureActivity extends Activity {
         setContentView(R.layout.main);
 
         openOptionsMenu();
+
         gLib = GestureLibraries.fromFile(getExternalFilesDir(null) + "/" + "gesture.txt");
         gLib.load();
 

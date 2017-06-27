@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/raw/gesture.txt",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/raw/gesture.txt"
+    },
+    {
         "merged": "/home/ntthrk/Documents/GestureBuilder/app/build/intermediates/res/merged/debug/raw/gesture.txt",
         "source": "/home/ntthrk/Documents/GestureBuilder/app/src/main/res/raw/gesture.txt"
     }

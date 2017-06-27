@@ -6,5 +6,13 @@
     {
         "merged": "/home/ntthrk/Documents/GestureBuilder/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
         "source": "/home/ntthrk/Documents/GestureBuilder/app/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_builder.png",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/drawable-mdpi/ic_builder.png"
+    },
+    {
+        "merged": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
+        "source": "/home/ntthrk/Documents/SeniorProject_PSJ_DEMO/Exsample/Ex2/GestureBuilder/app/src/main/res/drawable-mdpi/ic_launcher.png"
     }
 ]

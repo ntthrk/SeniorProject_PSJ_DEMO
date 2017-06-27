@@ -10,6 +10,8 @@ import android.gesture.GestureOverlayView;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import android.gesture.Prediction;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +25,12 @@ public class GestureManagement  {
     private File pathFile = new File(Environment.getExternalStorageDirectory() , "/gesturesPSJ");
     private  GesturesDBHelper gesturesDBHelper;
 
-    public void saveGesture(String mNameGesture, Gesture mGesture, String detail, ArrayList<String> textList, FragmentActivity activity){
+    protected File getPathGestureFile(){
+        return pathFile;
+    }
 
+    public String saveGesture(String mNameGesture, Gesture mGesture, String detail, ArrayList<String> textList, FragmentActivity activity){
+        String id = null ;
 
         final String path = new File(Environment.getExternalStorageDirectory(), "gesturesPSJ").getAbsolutePath();
         //final String path2 = new File(Environment.getExternalStorageDirectory(), "gesture").getAbsolutePath();
@@ -49,6 +55,8 @@ public class GestureManagement  {
         } catch (Exception e) {
             Log.e("Error SaveData!!!!", e.getMessage());
         }
+
+        return  ckAddData;
         //ex==============================================
 
         // First method
@@ -66,6 +74,20 @@ public class GestureManagement  {
         //==================================================
     }
 
+    public String matchGesture(Gesture gesture) {
+        if (mGestureLibrary.load()) {
+            ArrayList<Prediction> predictions = mGestureLibrary.recognize(gesture);
+            if (!predictions.isEmpty()) {
+                Prediction prediction = predictions.get(0);
+                if (prediction.score >= 1) {
+                    Log.i( "mathGesture", prediction.name + "score > 1" );
+                    return prediction.name;
+                }
+            }
+        }
+        return "";
+    }
+
     private void resetDrawGesture(String mNameGesture,Gesture mGesture){
 
         mGestureLibrary.addGesture(mNameGesture, mGesture);
@@ -75,12 +97,13 @@ public class GestureManagement  {
     private void resetAll(){
 
     }
-    private MyGesture getSmybolData(String symbolId,String mNameGesture, Gesture mGesture, FragmentActivity activity){
+    /*private MyGesture getSmybolData(){
         gesturesDBHelper = new GesturesDBHelper(activity.getBaseContext());
-        MyGesture myGesture = gesturesDBHelper.getValues(symbolId);
+        MyGesture myGesture = new MyGesture();
+        myGesture = gesturesDBHelper.getValues(symbolId);
        // myGesture.setGesture( mGestureLibrary.getGestures(mNameGesture) );
         return myGesture;
-    }
+    }*/
     private boolean deleteGesture(String symbolId,String mNameGesture, Gesture mGesture, FragmentActivity activity){
         boolean result = false;
         gesturesDBHelper = new GesturesDBHelper(activity.getBaseContext());

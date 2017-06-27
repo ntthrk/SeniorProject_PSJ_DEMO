@@ -13,9 +13,10 @@
         android:background="#ffffff"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/symbol_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="เลือกเพื่อแสดงเป็นเสียง"
+            android:text=""
             android:textSize="24sp"/>
         <ListView
             android:id="@+id/listText"

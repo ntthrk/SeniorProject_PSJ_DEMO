@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class GesturesDBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "DB_PSJ.db";
@@ -164,10 +165,63 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
         return id_symbol;
     }
 
+    public String[] loadListText(String gestureName) {
+        ArrayList<String> idSymbolList = new ArrayList<String>();;
+        Cursor mCursor;
+        String id_symbol;
+        String[] textList = null;
+        Log.i("loadListText : ", gestureName);
+        if (gestureName != null || gestureName.isEmpty()){
+            int count;
+            db = this.getReadableDatabase();
+
+            mCursor = db.rawQuery(
+                    "SELECT * FROM " + TABLE_NAME1 +
+                            " WHERE "+COL_NAME_SYMBOL+" = ? ", new String[]{gestureName}, null);
+            Log.i("count of id",""+mCursor.getCount());
+            mCursor.moveToFirst();
+            while (!mCursor.isAfterLast()) {
+                idSymbolList.add(mCursor.getString(0));
+                Log.i("get_id_Symbol : ", mCursor.getString(0));
+                mCursor.moveToNext();
+            }
+            mCursor.close();
+
+            if (idSymbolList.size() == 1) {
+                Log.i("UUU","edpwld");
+                id_symbol = idSymbolList.get(0);
+                if (id_symbol != null || id_symbol.isEmpty()) {
+                    mCursor = db.rawQuery(
+                            "SELECT * FROM " + TABLE_NAME2 +
+                                    " WHERE "+COL_ID_SYMBOL+" = ? ", new String[]{id_symbol}, null);
+                    count = 0;
+                    Log.i("UUU","edpwld222"+mCursor.getCount());
+                    mCursor.moveToFirst();
+                    textList = new String[mCursor.getCount()];
+                    while (!mCursor.isAfterLast()){
+                        textList[count] = mCursor.getString(1);
+                        count++;
+                        Log.i("Text : ", mCursor.getString(1)+" count :"+count);
+                        mCursor.moveToNext();
+                    }
+
+                    mCursor.close();
+                }
+
+            }
+
+        }
+
+        db.close();
+        return textList;
+
+    }
+
     public MyGesture getValues(String id){
         db = this.getReadableDatabase();
         MyGesture myGesture = new MyGesture();
         ArrayList<String> textList = new ArrayList<>();
+
         int count = -1 ;
         Cursor cursorOfSymbolTB;
         Cursor cursorOfTextTB;
