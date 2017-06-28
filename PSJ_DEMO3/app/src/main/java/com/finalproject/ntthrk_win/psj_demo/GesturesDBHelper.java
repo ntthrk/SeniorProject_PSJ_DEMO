@@ -88,23 +88,6 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-/*//    protected void insertSmybolTable(String name, String detail){
-//        db.execSQL("INSERT INTO  "+ TABLE_NAME1 +
-//                "("+ COL_NAME_SYMBOL +","+ COL_DETAIL_SYMBOL +") " +
-//                "VALUES ('"+ name +"','"+ detail +"');");
-//
-//
-//    }
-
-
-
-/*
-    protected void rawQueryDB(String TABLE_NAME,String Where, String[] value){
-        mCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME1 +
-                " WHERE "+ COL_NAME_SYMBOL +" = ? ", new String[] {name},null);
-    }
-*/
-
 
     public String addData(String name,String detail,ArrayList<String> textList) {
         //boolean finish = false;
@@ -165,6 +148,7 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
         return id_symbol;
     }
 
+    //All Text of Symbol
     public String[] loadListText(String gestureName) {
         ArrayList<String> idSymbolList = new ArrayList<String>();;
         Cursor mCursor;
@@ -217,50 +201,50 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //Values
     public MyGesture getValues(String id){
         db = this.getReadableDatabase();
         MyGesture myGesture = new MyGesture();
         ArrayList<String> textList = new ArrayList<>();
 
-        int count = -1 ;
-        Cursor cursorOfSymbolTB;
-        Cursor cursorOfTextTB;
+        int count = 0 ;
+        Cursor mCursor;
 
-        cursorOfSymbolTB = db.rawQuery(
+        mCursor = db.rawQuery(
                 "SELECT * FROM " + TABLE_NAME1 +
                 " WHERE _id = ? ", new String[] {id},null);
 
-        String[] colOfSymbol =  cursorOfSymbolTB.getColumnNames();
-        count = cursorOfSymbolTB.getCount();
-        Log.i("Colum of Symbol Table : ", colOfSymbol.toString()+" count :"+ count);
+        count = mCursor.getCount();
+        Log.i(" count :",""+ count + "  mCursot"+ mCursor.toString() );
 
-        if(cursorOfSymbolTB != null && count == 1){
-            myGesture.setId(cursorOfSymbolTB.getString(cursorOfSymbolTB.getColumnIndex("_id")));
-            myGesture.setGestureName(cursorOfSymbolTB.getString(cursorOfSymbolTB.getColumnIndex(COL_NAME_SYMBOL)));
-            myGesture.setDetailGesture(cursorOfSymbolTB.getString(cursorOfSymbolTB.getColumnIndex(COL_DETAIL_SYMBOL)));
+        if(mCursor != null && count == 1){
+            myGesture.setId(mCursor.getString(mCursor.getColumnIndex("_id")));
+            myGesture.setGestureName(mCursor.getString(mCursor.getColumnIndex(COL_NAME_SYMBOL)));
+            myGesture.setDetailGesture(mCursor.getString(mCursor.getColumnIndex(COL_DETAIL_SYMBOL)));
         }else{
 
         }
+        mCursor.close();
 
-        count = -1 ;
-        cursorOfTextTB = db.rawQuery(
+        count = 0 ;
+        mCursor = db.rawQuery(
                 "SELECT * FROM " + TABLE_NAME2 +
                         " WHERE "+ COL_ID_SYMBOL +" = ? ", new String[] {id},null);
-        count = cursorOfTextTB.getCount();
+        count = mCursor.getCount();
         Log.i("Size of Text Table : ",count+"");
         if(count > -1 ){
-            cursorOfTextTB.moveToFirst();
-            while ( !cursorOfTextTB.isAfterLast() ){
-                textList.add(cursorOfTextTB.getString(1));
-                Log.i("Text : ",cursorOfTextTB.getString(1));
-                cursorOfTextTB.moveToNext();
+            mCursor.moveToFirst();
+            while ( !mCursor.isAfterLast() ){
+                textList.add(mCursor.getString(1));
+                Log.i("Text : ",mCursor.getString(1));
+                mCursor.moveToNext();
             }
         }
 
 
         myGesture.setTextGesture(textList);
 
-        cursorOfSymbolTB.close();
+        mCursor.close();
         return myGesture;
     }
 

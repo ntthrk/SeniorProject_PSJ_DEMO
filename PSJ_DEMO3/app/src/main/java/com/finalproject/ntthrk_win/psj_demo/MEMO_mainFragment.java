@@ -36,18 +36,18 @@ public class MEMO_mainFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
-        MEMO_listviewAdapter adapter = new MEMO_listviewAdapter(getContext(), gestureList);
+        //MEMO_listviewAdapter adapter = new MEMO_listviewAdapter(getContext(), gestureList);
 
         ListView listView = (ListView) view.findViewById(R.id.groupList_view1);
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new MEMO_detailFragment()).commit();
+                /*getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new MEMO_detailFragment()).commit();*/
             }
         });
-        */
+
+
         addData= (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.group_add);
 
         addData.setOnClickListener(new View.OnClickListener() {

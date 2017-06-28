@@ -76,16 +76,22 @@ public class MEMO_gestureManagementFragment extends Fragment {
                                 getActivity());
                         Log.i("Gesture Overlay :" , overlay.toString() );
                         if(id != null){
-                            nameSymbol = myGesture.getGestureName();
+                            /*nameSymbol = myGesture.getGestureName();
                             detailSymbol = myGesture.getDetailGesture();
-                            txtList = myGesture.getTextGesture().toArray(new String [0]);
+                            txtList = myGesture.getTextGesture().toArray(new String [0]);*/
+
+                            myGesture = null;
+
+                            //next Page
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.content, new MEMO_detailFragment(id)).commit();
+
+
+                            /*getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.content, new MEMO_detailFragment(id*//*,nameSymbol,detailSymbol,txtList*//*)).commit();*/
                         }
 
-                        myGesture = null;
 
-                        //next Page
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content, new MEMO_detailFragment(id,nameSymbol,detailSymbol,txtList)).commit();
                     }else {
                         Log.i("Gesture Overlay :" , "Null!!!" );
                     }

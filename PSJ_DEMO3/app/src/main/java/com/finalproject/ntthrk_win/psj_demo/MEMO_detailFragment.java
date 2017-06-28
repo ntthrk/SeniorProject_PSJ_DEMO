@@ -43,14 +43,17 @@ public class MEMO_detailFragment extends Fragment {
     private String detailSymbol;
     private String [] txtList = {};
 
-    public MEMO_detailFragment(String idSymbol,String nameSymbol,String detailSymbol,String[] txtList) {
+    public MEMO_detailFragment(String idSymbol){
+        this.idSymbol = idSymbol;
+    }
+    /*public MEMO_detailFragment(String idSymbol,String nameSymbol,String detailSymbol,String[] txtList) {
         // Required empty public constructor
         this.idSymbol = idSymbol;
         this.nameSymbol = nameSymbol;
         this.detailSymbol = detailSymbol;
         this.txtList = txtList;
 
-    }
+    }*/
 
 
     @Override
@@ -70,15 +73,14 @@ public class MEMO_detailFragment extends Fragment {
         textListLV = (ListView) view.findViewById(R.id.text_list);
         deleteBT = (Button) view.findViewById(R.id.delete_BT);
         editBT = (Button) view.findViewById(R.id.edit_BT);
-
-        //dbHelper =  new GesturesDBHelper(getContext());
-
-        NameSymbolTV.setText(nameSymbol);
-
+        Log.i("detailFr",idSymbol);
+        dbHelper =  new GesturesDBHelper(getContext());
+        myGesture = dbHelper.getValues(idSymbol);
+        NameSymbolTV.setText(myGesture.getGestureName());
         //SymbolImageIV
+        symbolDetailTV.setText(myGesture.getDetailGesture());
 
-        symbolDetailTV.setText(detailSymbol);
-
+        txtList = myGesture.getTextGesture().toArray(new String[0]);
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,txtList);
         textListLV.setAdapter(adapter);
 
