@@ -1,13 +1,16 @@
 package com.finalproject.ntthrk_win.psj_demo;
 
 
+import android.content.DialogInterface;
 import android.gesture.Gesture;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,9 +32,13 @@ public class MEMO_gestureManagementFragment extends Fragment {
     private Button nextBT;
     private Button backBT;
     private Gesture mGesture;
-    private MyGesture myGesture;
     private GestureOverlayView overlay;
+    private MyGesture myGesture = new MyGesture();
+    private GestureManagement gestureManagement;
 
+    public MEMO_gestureManagementFragment(MyGesture myGesture) {
+        this.myGesture = myGesture;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,60 +51,72 @@ public class MEMO_gestureManagementFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        myGesture = new MyGesture();
-
         overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
         overlay.addOnGestureListener(new  GesturesProcessor());
 
         nextBT = (Button) view.findViewById(R.id.next_TV);
+        nextBT.setEnabled(false);
         nextBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (myGesture.getGestureName() != null) {
                     String id = null;
-                    String nameSymbol = null;
-                    String detailSymbol = null;
-                    String[] txtList = {};
-
-                    GestureManagement gestureManagement = new GestureManagement();
-
-                    final CharSequence name = myGesture.getGestureName();
-                    if (name.length() == 0) {
-                        Log.i("Gesture","missing name");
-                        return;
-                    }
-                    Log.i("Gesture Name : ",myGesture.getGestureName());
+                    gestureManagement = new GestureManagement();
 
                     if(overlay.toString() != null ){
+
                         id = gestureManagement.saveGesture(
-                                myGesture.getGestureName(), myGesture.getGesture(),
+                                myGesture.getGestureName(), mGesture,
                                 myGesture.getDetailGesture(), myGesture.getTextGesture(),
                                 getActivity());
-                        Log.i("Gesture Overlay :" , overlay.toString() );
+
+                        Log.e("MEMO_gestureManagementFragment : " , overlay.toString() );
+
                         if(id != null){
-                            /*nameSymbol = myGesture.getGestureName();
-                            detailSymbol = myGesture.getDetailGesture();
-                            txtList = myGesture.getTextGesture().toArray(new String [0]);*/
-
                             myGesture = null;
-
+                            //Log.e("ggooooooooooooooooo",myGesture.getGestureName());
                             //next Page
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content, new MEMO_detailFragment(id)).commit();
 
+                        }else{
+                            Log.e("MEMO_gestureManagementFragment : ","id null!!!");
+                            //dialog ไม่สามารถ save คุณต้องการบันทึกใหม่หรือไม่
+                            AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                builder = new AlertDialog.Builder(getContext());
+                            }
+                            builder.setTitle("บันทึกไม่สำเร็จ !!!")
+                                    .setMessage("คุณไม่สามารถบันทึกสัญลักษณ์เพิ่มได้ คุณต้องการดำเนินการใหม่หรือไม่")
+                                    .setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            getActivity().getSupportFragmentManager().beginTransaction()
+                                                .replace(R.id.content, new MEMO_managementFragment()).commit();
 
-                            /*getActivity().getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content, new MEMO_detailFragment(id*//*,nameSymbol,detailSymbol,txtList*//*)).commit();*/
+                                        }
+                                    })
+                                    .setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            getActivity().getSupportFragmentManager().beginTransaction()
+                                                .replace(R.id.content, new MEMO_mainFragment()).commit();
+
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+
                         }
 
 
                     }else {
-                        Log.i("Gesture Overlay :" , "Null!!!" );
+                        Log.e("MEMO_gestureManagementFragment : ", "Gesture Null!!!" );
                     }
 
                 } else {
-                   /* setResult(RESULT_CANCELED);*/
+
                 }
 
             }
@@ -108,8 +127,8 @@ public class MEMO_gestureManagementFragment extends Fragment {
         backBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new MEMO_managementFragment()).commit();
+                /*getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new MEMO_managementFragment()).commit();*/
             }
         });
     }
@@ -138,11 +157,9 @@ public class MEMO_gestureManagementFragment extends Fragment {
         @Override
         public void onGestureEnded(GestureOverlayView overlay, MotionEvent event) {
             mGesture = overlay.getGesture();
-
             if(mGesture.getLength() < LENGTH_THRESHOLD){
                 overlay.clear(false);
             }
-            myGesture.setGesture(mGesture);
             nextBT.setEnabled(true);
         }
 

@@ -2,6 +2,8 @@ package com.finalproject.ntthrk_win.psj_demo;
 
 
 import android.gesture.Gesture;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,25 +37,16 @@ public class MEMO_detailFragment extends Fragment {
 
     private MyGesture myGesture = new MyGesture();
     private ArrayAdapter<String> adapter ;
-    private GesturesDBHelper dbHelper;
-    //private GestureManagement gestureManagement;
+    //private GesturesDBHelper dbHelper;
+    private GestureManagement gestureManagement;
 
     private String idSymbol;
-    private String nameSymbol ;
-    private String detailSymbol;
-    private String [] txtList = {};
+    private String[] txtList = null;
 
     public MEMO_detailFragment(String idSymbol){
+
         this.idSymbol = idSymbol;
     }
-    /*public MEMO_detailFragment(String idSymbol,String nameSymbol,String detailSymbol,String[] txtList) {
-        // Required empty public constructor
-        this.idSymbol = idSymbol;
-        this.nameSymbol = nameSymbol;
-        this.detailSymbol = detailSymbol;
-        this.txtList = txtList;
-
-    }*/
 
 
     @Override
@@ -73,14 +66,37 @@ public class MEMO_detailFragment extends Fragment {
         textListLV = (ListView) view.findViewById(R.id.text_list);
         deleteBT = (Button) view.findViewById(R.id.delete_BT);
         editBT = (Button) view.findViewById(R.id.edit_BT);
-        Log.i("detailFr",idSymbol);
-        dbHelper =  new GesturesDBHelper(getContext());
-        myGesture = dbHelper.getValues(idSymbol);
+
+
+        myGesture.getGesture();
+
+        //dbHelper =  new GesturesDBHelper(getContext());
+        gestureManagement = new GestureManagement();
+        Log.e("detailFr id : ",idSymbol);
+
+        //myGesture = dbHelper.getValues(idSymbol);
+        try{
+            myGesture = gestureManagement.loadGesture(idSymbol,getActivity());
+        }catch (Exception e){
+            Log.e("LoadGesture", e.getMessage());
+        }
+
+        Log.e("detailFr  : ",idSymbol);
+
         NameSymbolTV.setText(myGesture.getGestureName());
-        //SymbolImageIV
+
+        Bitmap image = myGesture.getGesture().toBitmap(
+                100,
+                100,
+                 12,
+                Color.BLACK);
+        SymbolImageIV.setImageBitmap(image);
+
+
+
         symbolDetailTV.setText(myGesture.getDetailGesture());
 
-        txtList = myGesture.getTextGesture().toArray(new String[0]);
+        txtList = myGesture.getTextGesture().toArray(new String[myGesture.getTextGesture().size()]);
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,txtList);
         textListLV.setAdapter(adapter);
 

@@ -6,11 +6,23 @@
     tools:context="com.finalproject.ntthrk_win.psj_demo.TTS_mainFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:orientation="vertical"
         android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ชื่อเรียกสัญลักษณ์ : "/>
+        <EditText
+            android:id="@+id/name_smybol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/gestures_overlay"
+            />
         <TextView
             android:id="@+id/text_tts"
             android:layout_width="wrap_content"
@@ -20,8 +32,10 @@
         <android.gesture.GestureOverlayView
             android:id="@+id/gestures_overlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gestureStrokeType="multiple" />
+
         <Button
             android:id="@+id/symbolConfirm_button"
             android:text="ยืนยัน"
@@ -30,6 +44,6 @@
             android:layout_centerInParent="true"
             android:layout_alignParentBottom="true"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>

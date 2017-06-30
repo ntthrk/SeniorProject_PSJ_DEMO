@@ -4,6 +4,7 @@ package com.finalproject.ntthrk_win.psj_demo;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,7 @@ public class MEMO_managementFragment extends Fragment {
     private ListView listTxtLV;
     private ArrayList<TextModel> textModelArr = new ArrayList<TextModel>();
     private CustomAdapter adapter;
+    private ArrayList<String> textGestureArr;
 
 
 
@@ -82,17 +84,23 @@ public class MEMO_managementFragment extends Fragment {
         nextBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textGestureArr = new ArrayList<String>();
+                if(CheckForm()){
+                    myGesture.setGestureName(gestureName.getText().toString());
+                    myGesture.setDetailGesture(detailGest.getText().toString());
+                    for (int i = 0; i< textModelArr.size(); i++){
+                        textGestureArr.add(textModelArr.get(i).getText());
+                    }
+                    myGesture.setTextGesture(textGestureArr);
 
-                ArrayList<String> textGestureArr = new ArrayList<String>();
-                myGesture.setGestureName(gestureName.getText().toString());
-                myGesture.setDetailGesture(detailGest.getText().toString());
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content, new MEMO_gestureManagementFragment(myGesture)).commit();
 
-                for (int i = 0; i< textModelArr.size(); i++){
-                    textGestureArr.add(textModelArr.get(i).getText());
+                }else{
+                    myGesture = null;
+
                 }
-                myGesture.setTextGesture(textGestureArr);
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new MEMO_gestureManagementFragment()).commit();
+
 
             }
         });
@@ -100,8 +108,7 @@ public class MEMO_managementFragment extends Fragment {
     public void addText(String text) {
 
         if (text.isEmpty()) {
-            Toast.makeText(getContext(), "กรุณาระบุข้อความ",
-                    Toast.LENGTH_SHORT).show();
+            textInput.setError("กรุณาระบุ");
         } else {
             TextModel textModel = new TextModel(text);
             textModelArr.add(textModel);
@@ -178,4 +185,26 @@ public class MEMO_managementFragment extends Fragment {
             return convertView;
         }
     }
+
+    private boolean CheckForm(){
+        final CharSequence name = gestureName.getText();
+        final CharSequence detail = detailGest.getText();
+        int c = 1;
+        if (name.length() == 0) {
+            gestureName.setError("กรุณากรอกชื่อแทนสัญลักษณ์");
+            c++;
+        }
+        if (detail.length() == 0) {
+            detailGest.setError("กรุณากรอกคำอธิบายสัญลักษณ์");
+            c++;
+        }
+        if(textModelArr.isEmpty()){
+             textInput.setError("กรุณาเพิ่มข้อความหรือประโยค");
+            c++;
+        }
+        if(c > 3) return false;
+        else return true;
+    }
+
+
 }

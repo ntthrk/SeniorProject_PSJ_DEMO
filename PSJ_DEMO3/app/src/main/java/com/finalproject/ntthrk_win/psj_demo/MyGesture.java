@@ -1,6 +1,7 @@
 package com.finalproject.ntthrk_win.psj_demo;
 
 import android.gesture.Gesture;
+import android.media.Image;
 
 import java.util.ArrayList;
 
@@ -9,12 +10,21 @@ public class MyGesture {
     protected static Gesture gesture;
     protected static String gestureName;
     protected static String detailGesture;
+    protected ArrayList<Gesture> gArr;
+    protected Image image;
     protected static ArrayList<String> textGesture;
 
     public MyGesture(){
 
     }
 
+    public ArrayList<Gesture> getgArr() {
+        return gArr;
+    }
+
+    public void setgArr(ArrayList<Gesture> gArr) {
+        this.gArr = gArr;
+    }
 
     public MyGesture(Gesture gesture, String gestname){
         this.gesture = gesture;
@@ -76,4 +86,11 @@ public class MyGesture {
         this.gestureName = name;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 }

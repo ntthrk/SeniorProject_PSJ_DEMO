@@ -12,14 +12,20 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MEMO_listviewAdapter extends ArrayAdapter<MEMO_listviewAdapter.gestureArrView> {
+public class MEMO_listviewAdapter extends ArrayAdapter<MyGesture> {
     private Context context;
-    private static List<gestureArrView> gestureArr ;
+    private static ArrayList<MyGesture> gestureArr ;
+    private TextView nameSymbolTV;
+    private TextView detailSymbolTV;
+    private ImageView imageSymbolTV;
 
-    public MEMO_listviewAdapter(Context context, ArrayList<gestureArrView> gestureArr  ){
+
+    public MEMO_listviewAdapter(Context context, ArrayList<MyGesture> gestureArr  ){
         super(context, R.layout.fragment_memo_main, gestureArr);
         this.context = context;
         this.gestureArr = gestureArr;
+
+
     }
 
     @Override
@@ -28,7 +34,7 @@ public class MEMO_listviewAdapter extends ArrayAdapter<MEMO_listviewAdapter.gest
     }
 
     @Override
-    public gestureArrView getItem(int position) {
+    public MyGesture getItem(int position) {
         return null;
     }
 
@@ -42,35 +48,31 @@ public class MEMO_listviewAdapter extends ArrayAdapter<MEMO_listviewAdapter.gest
         View v = view;
         LayoutInflater mInflater = (LayoutInflater)
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        gestureArrView g = new gestureArrView();
+        MyGesture myGesture = new MyGesture();
 
         if(view == null){
 
-            v = mInflater.inflate(R.layout.memo_listview_layout, parent, false);
+            v = mInflater.inflate(R.layout.memo_listview_layout, null);
 
-            TextView txtNameGroup = (TextView) v.findViewById(R.id.group_name1);
-            TextView txtDetailGroup = (TextView) v.findViewById(R.id.group_name1);
-            ImageView imageView = (ImageView) v.findViewById(R.id.gesture_image1);
+            nameSymbolTV = (TextView) v.findViewById(R.id.symbol_name1);
+            detailSymbolTV = (TextView) v.findViewById(R.id.symbol_detail1);
+            imageSymbolTV = (ImageView) v.findViewById(R.id.symbol_image1);
 
-            g.resGestureID = null;
-            g.groupName = txtNameGroup;
-            g.groupDetail = txtDetailGroup;
-            g.gestureImage = imageView;
 
-            v.setTag(g);
+            try{
+
+            }catch (Exception e){
+
+
+            }
+
+            v.setTag(myGesture);
         }
         else{
-            g = (gestureArrView) v.getTag();
+            myGesture = (MyGesture) v.getTag();
 
         }
         return v;
     }
 
-    class gestureArrView{
-        public String resGestureID;
-        public TextView groupName;
-        public TextView groupDetail;
-        public ImageView gestureImage;
-
-    }
 }

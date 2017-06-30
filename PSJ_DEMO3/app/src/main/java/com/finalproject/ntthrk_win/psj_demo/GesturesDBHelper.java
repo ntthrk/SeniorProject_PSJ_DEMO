@@ -50,6 +50,14 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
                 COL_CREATE_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                 COL_UPDATE_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP " +
                 ");");
+        db.execSQL("CREATE TABLE " + TABLE_NAME2 +
+                "( _id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_TEXT + " TEXT NOT NULL, " +
+                COL_ID_SYMBOL + " TEXT NOT NULL" +
+                ");");
+
+
+        Log.i(getClass().getSimpleName(), "CREATE_TABLE");
 
 /*        String CREATE_SYMBOL_TABLE =
                 String.format("CREATE TABLE %s " +
@@ -65,14 +73,7 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
                 + COL_UPDATE_DATE + "INTEGER NOT NULL, "
                 + ")");*/
 
-        db.execSQL("CREATE TABLE " + TABLE_NAME2 +
-                "( _id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_TEXT + " TEXT NOT NULL, " +
-                COL_ID_SYMBOL + " TEXT NOT NULL" +
-                ");");
 
-
-        Log.i(getClass().getSimpleName(), "CREATE_TABLE");
 
 
     }
@@ -201,11 +202,11 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
 
     }
 
-    //Values
+    //getOneValues
     public MyGesture getValues(String id){
         db = this.getReadableDatabase();
         MyGesture myGesture = new MyGesture();
-        ArrayList<String> textList = new ArrayList<>();
+        /*ArrayList<String> textList = new ArrayList<>();
 
         int count = 0 ;
         Cursor mCursor;
@@ -242,10 +243,40 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
         }
 
 
-        myGesture.setTextGesture(textList);
+        myGesture.setTextGesture(textList);*/
 
-        mCursor.close();
+       // mCursor.close();
         return myGesture;
+    }
+
+
+    //getMultiValues
+    public ArrayList<MyGesture> getMutiValues(){
+        db = this.getReadableDatabase();
+        ArrayList<MyGesture> myGestures= new ArrayList<>();
+        Cursor mCursor1 = db.rawQuery("select * from "+TABLE_NAME1 , null);
+        Cursor mCursor2 = db.rawQuery("select * from "+TABLE_NAME2 , null);
+        while(mCursor1.moveToNext()){
+            /*myGestures.add( new MyGesture(
+                    mCursor.getString(
+                            mCursor.getColumnIndex(
+                                    CARS_COLUMN_COLOR)
+                    ),
+                    mCursor.getString(
+                            mCursor.getColumnIndex(
+                                    CARS_COLUMN_NAME)
+                    ),
+                    mCursor.getString(
+                            mCursor.getColumnIndex(
+                                    CARS_COLUMN_PLACE)
+                    )
+            ));*/
+
+        }
+
+        return myGestures;
+
+
     }
 
     public boolean deleteData(String id) {

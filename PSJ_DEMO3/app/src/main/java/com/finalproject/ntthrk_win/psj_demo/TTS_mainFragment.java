@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,7 @@ public class TTS_mainFragment extends Fragment {
         gestureLibrary.load();
 
         overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
+
         gestureName =  "โดนัท";
         nameGestureTV.setText(gestureName);
 

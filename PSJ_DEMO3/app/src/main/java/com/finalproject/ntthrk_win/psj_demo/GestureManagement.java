@@ -20,43 +20,38 @@ import android.widget.Toast;
 import android.content.Context;
 public class GestureManagement  {
 
-    private GestureLibrary mGestureLibrary;
+    public static  GestureManagement gestureManagement;
+    private Context context;
     private boolean mDrawningStatus ;
-    private File pathFile = new File(Environment.getExternalStorageDirectory() , "/gesturesPSJ");
-    private  GesturesDBHelper gesturesDBHelper;
+    private static final File pathFile = new File(Environment.getExternalStorageDirectory() , "/gesturesPSJ");
+    private static final String pathAddress = pathFile.getAbsolutePath();
+    private static GestureLibrary mGestureLibrary ;
+    private GesturesDBHelper gesturesDBHelper;
+
 
     protected File getPathGestureFile(){
         return pathFile;
     }
 
-    public String saveGesture(String mNameGesture, Gesture mGesture, String detail, ArrayList<String> textList, FragmentActivity activity){
+    protected String saveGesture(String mNameGesture, Gesture mGesture, String detail, ArrayList<String> textList, FragmentActivity activity){
         String id = null ;
+        mGestureLibrary = GestureLibraries.fromFile(pathFile);
+        Log.e("GestureManagement --> Gesture Path : ", pathAddress );
 
-        final String path = new File(Environment.getExternalStorageDirectory(), "gesturesPSJ").getAbsolutePath();
-        //final String path2 = new File(Environment.getExternalStorageDirectory(), "gesture").getAbsolutePath();
-        Log.i("Gesture Path : ", path );
-        //Log.e("Gesture",path2);
-
-        if(mGestureLibrary == null){
-            Log.i("Gesture : ","GestureLibrary is not null.");
-            mGestureLibrary = GestureLibraries.fromFile(pathFile);
-        }
-
-        String ckAddData = null ;
         gesturesDBHelper = new GesturesDBHelper(activity.getBaseContext());
         try {
             if(mNameGesture != null){
-                ckAddData = gesturesDBHelper.addData(mNameGesture, detail, textList);
+                id = gesturesDBHelper.addData(mNameGesture, detail, textList);
             }
-            if(ckAddData != null){
-                mGestureLibrary.addGesture(mNameGesture , mGesture);
+            if(id != null){
+                mGestureLibrary.addGesture(mNameGesture, mGesture);
                 mGestureLibrary.save();
             }
         } catch (Exception e) {
             Log.e("Error SaveData!!!!", e.getMessage());
         }
 
-        return  ckAddData;
+        return  id;
         //ex==============================================
 
         // First method
@@ -74,6 +69,24 @@ public class GestureManagement  {
         //==================================================
     }
 
+    protected MyGesture loadGesture(String id, FragmentActivity activity){
+        MyGesture myGesture = new MyGesture();
+        gesturesDBHelper = new GesturesDBHelper(activity.getBaseContext());
+        mGestureLibrary.load();
+        if(id != null){
+            myGesture = gesturesDBHelper.getValues(id);
+
+            myGesture.setGesture( mGestureLibrary
+                    .getGestures(myGesture
+                            .getGestureName() )
+                    .get(Integer.parseInt(id.trim()) )
+                    );
+
+        }
+
+        return myGesture;
+    }
+
     public String matchGesture(Gesture gesture) {
         if (mGestureLibrary.load()) {
             ArrayList<Prediction> predictions = mGestureLibrary.recognize(gesture);
@@ -87,6 +100,8 @@ public class GestureManagement  {
         }
         return "";
     }
+
+
 
     private void resetDrawGesture(String mNameGesture,Gesture mGesture){
 
