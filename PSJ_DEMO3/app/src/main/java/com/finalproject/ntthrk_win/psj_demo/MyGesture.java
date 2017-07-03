@@ -6,44 +6,32 @@ import android.media.Image;
 import java.util.ArrayList;
 
 public class MyGesture {
-    protected static String id;
-    protected static Gesture gesture;
-    protected static String gestureName;
-    protected static String detailGesture;
+    protected String id;
+    protected Gesture gesture;
+    protected String gestureName;
+    protected String detailGesture;
     protected ArrayList<Gesture> gArr;
     protected Image image;
-    protected static ArrayList<String> textGesture;
+    protected ArrayList<String> textGesture;
 
     public MyGesture(){
 
     }
 
-    public ArrayList<Gesture> getgArr() {
-        return gArr;
-    }
-
-    public void setgArr(ArrayList<Gesture> gArr) {
-        this.gArr = gArr;
-    }
-
-    public MyGesture(Gesture gesture, String gestname){
-        this.gesture = gesture;
-        this.gestureName = gestname;
-    }
-
-    public MyGesture(Gesture gesture, String gestureName, String detailGesture, ArrayList<String> textGesture) {
-        this.gesture = gesture;
-        this.gestureName = gestureName;
-        this.detailGesture = detailGesture;
-        this.textGesture = textGesture;
-    }
-
-    public static String getId() {
+    public String getId() {
         return id;
     }
 
-    public static void setId(String id) {
-        MyGesture.id = id;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Gesture getGesture() {
+        return gesture;
+    }
+
+    public void setGesture(Gesture gesture) {
+        this.gesture = gesture;
     }
 
     public String getGestureName() {
@@ -62,28 +50,12 @@ public class MyGesture {
         this.detailGesture = detailGesture;
     }
 
-    public ArrayList<String> getTextGesture() {
-        return textGesture;
+    public ArrayList<Gesture> getgArr() {
+        return gArr;
     }
 
-    public void setTextGesture(ArrayList<String> textGesture) {
-        this.textGesture = textGesture;
-    }
-
-    public Gesture getGesture(){
-        return gesture;
-    }
-
-    public void setGesture(Gesture gesture){
-        this.gesture = gesture;
-    }
-
-    public String getName(){
-        return gestureName;
-    }
-
-    public void setName(String name){
-        this.gestureName = name;
+    public void setgArr(ArrayList<Gesture> gArr) {
+        this.gArr = gArr;
     }
 
     public Image getImage() {
@@ -92,5 +64,13 @@ public class MyGesture {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public ArrayList<String> getTextGesture() {
+        return textGesture;
+    }
+
+    public void setTextGesture(ArrayList<String> textGesture) {
+        this.textGesture = textGesture;
     }
 }

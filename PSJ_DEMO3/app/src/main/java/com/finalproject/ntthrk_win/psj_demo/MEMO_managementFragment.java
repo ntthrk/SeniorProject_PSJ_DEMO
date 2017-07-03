@@ -18,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ import java.util.Arrays;
  * A simple {@link Fragment} subclass.
  */
 public class MEMO_managementFragment extends Fragment {
-    private MyGesture myGesture;
+    private MyGesture myGesture = new MyGesture();
     private Button nextBT;
     private EditText gestureName;
     private EditText detailGest;
@@ -42,9 +43,11 @@ public class MEMO_managementFragment extends Fragment {
     private ArrayList<String> textGestureArr;
 
 
-
     public MEMO_managementFragment() {
         // Required empty public constructor
+    }
+    public MEMO_managementFragment(MyGesture myGesture) {
+        this.myGesture = myGesture;
     }
 
 
@@ -58,8 +61,7 @@ public class MEMO_managementFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        myGesture = new MyGesture();
+        boolean editStatus = false;
         gestureName = (EditText) view.findViewById(R.id.nameGest_txt);
         detailGest = (EditText) view.findViewById(R.id.detailGest_txt);
         textInput = (EditText) view.findViewById(R.id.textInput);
@@ -68,7 +70,20 @@ public class MEMO_managementFragment extends Fragment {
         nextBT = (Button) view.findViewById(R.id.next_TV);
         adapter = new CustomAdapter(getActivity(),textModelArr);
         listTxtLV.setAdapter(adapter);
+       /* if(myGesture != null){
+            editStatus = true;
 
+            gestureName.setText(myGesture.gestureName);
+            detailGest.setText(myGesture.getDetailGesture());
+
+            textGestureArr = myGesture.getTextGesture().toArray(new String[myGesture.getTextGesture().size()]);
+            adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,textGestureArr);
+            listTxtLV.setAdapter(adapter);
+
+
+        }
+
+*/
         addTextBT.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

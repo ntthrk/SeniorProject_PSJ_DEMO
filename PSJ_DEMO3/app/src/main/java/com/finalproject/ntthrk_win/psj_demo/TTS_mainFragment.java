@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,9 +36,11 @@ import java.util.Locale;
 public class TTS_mainFragment extends Fragment {
     private GestureLibrary gestureLibrary;
     private GestureOverlayView overlay;
+    private GestureManagement gestureManagement;
     private String gestureName;
     private TextView nameGestureTV;
-    private Button symbolConfirmBT ;
+    private Button symbolConfirmBT;
+    private EditText inputText;
 
     public TTS_mainFragment() {
         // Required empty public constructor
@@ -54,16 +57,20 @@ public class TTS_mainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gestureName = "กรุณาลากนิ้วเป็นสัญลักษณ์บนหน้าจอ";
         nameGestureTV = (TextView) view.findViewById(R.id.text_tts);
+        inputText = (EditText) view.findViewById(R.id.name_smybol);
 
-        gestureLibrary = GestureLibraries.fromFile(new GestureManagement().getPathGestureFile());
+        gestureManagement = new GestureManagement();
+
+        gestureLibrary = GestureLibraries.fromFile(gestureManagement.getPathGestureFile());
         gestureLibrary.load();
 
         overlay = (GestureOverlayView) view.findViewById(R.id.gestures_overlay);
+        overlay.addOnGesturePerformedListener(handleGestureListener);
+        overlay.setGestureStrokeAngleThreshold(90.0f);
 
-        gestureName =  "โดนัท";
-        nameGestureTV.setText(gestureName);
+
+        inputText.setText(gestureName);
 
         symbolConfirmBT = (Button) view.findViewById(R.id.symbolConfirm_button);
         symbolConfirmBT.setOnClickListener(new View.OnClickListener() {
@@ -74,24 +81,35 @@ public class TTS_mainFragment extends Fragment {
 //                intent.putExtra("key",gestureName);
 //                startActivity(intent);
 
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new TTS_groupListFragment(gestureName)).commit();
+                Log.e("GEsture Symbol : ", "");
+
+                /*getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new TTS_groupListFragment(gestureName)).commit();*/
             }
         });
     }
-
-    public String matchGesture(Gesture gesture) {
-        if (gestureLibrary.load()) {
+    private OnGesturePerformedListener handleGestureListener = new OnGesturePerformedListener() {
+        @Override
+        public void onGesturePerformed(GestureOverlayView gestureView,
+                                       Gesture gesture) {
             ArrayList<Prediction> predictions = gestureLibrary.recognize(gesture);
-            if (!predictions.isEmpty()) {
+            Log.e("TTS_main", "recog thayu");
+
+            // one prediction needed
+            if (predictions.size() > 0) {
                 Prediction prediction = predictions.get(0);
-                if (prediction.score >= 1) {
-                    Log.i( "mathGesture", prediction.name + "score > 1" );
-                    return prediction.name;
+                // checking prediction
+                if (prediction.score > 1.0) {
+                    // and action
+                    Toast.makeText(getContext(), prediction.name,
+                            Toast.LENGTH_SHORT).show();
+                    Log.e("handleGestureListener",prediction.name);
+
                 }
             }
         }
-        return "";
-    }
+    };
+
+
 
 }

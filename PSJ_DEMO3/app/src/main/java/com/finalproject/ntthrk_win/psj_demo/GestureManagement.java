@@ -7,7 +7,6 @@ import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
 import android.gesture.GestureLibrary;
 import android.gesture.GestureOverlayView;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -18,6 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 import android.content.Context;
+
+
+
 public class GestureManagement  {
 
     public static  GestureManagement gestureManagement;
@@ -79,7 +81,7 @@ public class GestureManagement  {
             myGesture.setGesture( mGestureLibrary
                     .getGestures(myGesture
                             .getGestureName() )
-                    .get(Integer.parseInt(id.trim()) )
+                    .get(0)
                     );
 
         }
@@ -87,19 +89,6 @@ public class GestureManagement  {
         return myGesture;
     }
 
-    public String matchGesture(Gesture gesture) {
-        if (mGestureLibrary.load()) {
-            ArrayList<Prediction> predictions = mGestureLibrary.recognize(gesture);
-            if (!predictions.isEmpty()) {
-                Prediction prediction = predictions.get(0);
-                if (prediction.score >= 1) {
-                    Log.i( "mathGesture", prediction.name + "score > 1" );
-                    return prediction.name;
-                }
-            }
-        }
-        return "";
-    }
 
 
 
@@ -119,17 +108,23 @@ public class GestureManagement  {
        // myGesture.setGesture( mGestureLibrary.getGestures(mNameGesture) );
         return myGesture;
     }*/
-    private boolean deleteGesture(String symbolId,String mNameGesture, Gesture mGesture, FragmentActivity activity){
+
+    protected boolean deleteGesture(MyGesture myGesture, FragmentActivity activity){
         boolean result = false;
         gesturesDBHelper = new GesturesDBHelper(activity.getBaseContext());
 
-        if(symbolId != null){
-            result = gesturesDBHelper.deleteData(symbolId);
-            if(result){
-                mGestureLibrary.removeGesture(mNameGesture , mGesture);
-                mGestureLibrary.save();
+        if(myGesture.getId() != null){
+            Log.e("GestureManament : ","ID "+myGesture.getId());
+            try {
+                result = gesturesDBHelper.deleteData(myGesture.getId());
+                if (result) {
+                    mGestureLibrary.removeGesture(myGesture.getGestureName(),myGesture.getGesture());
+                    mGestureLibrary.save();
+                }
+            }catch (Exception e){
+                Log.e("DELETE ERROR!!!",e.getMessage());
             }
-            result = true;
+
         }
 
         return result;

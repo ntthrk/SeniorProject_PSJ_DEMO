@@ -75,6 +75,7 @@ public class MEMO_gestureManagementFragment extends Fragment {
 
                         if(id != null){
                             myGesture = null;
+
                             //Log.e("ggooooooooooooooooo",myGesture.getGestureName());
                             //next Page
                             getActivity().getSupportFragmentManager().beginTransaction()

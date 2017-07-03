@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
@@ -102,39 +103,44 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
         //------------------------------------------------------------------------//
 
         // insert smybol_table
+        try{
+            db.execSQL("INSERT INTO  "+ TABLE_NAME1 +
+                    "("+ COL_NAME_SYMBOL +","+ COL_DETAIL_SYMBOL +") " +
+                    "VALUES ('"+ name +"','"+ detail +"');");
 
-        db.execSQL("INSERT INTO  "+ TABLE_NAME1 +
-                "("+ COL_NAME_SYMBOL +","+ COL_DETAIL_SYMBOL +") " +
-                "VALUES ('"+ name +"','"+ detail +"');");
+            //get id_smybol_table
+            mCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME1 +
+                    " WHERE "+ COL_NAME_SYMBOL +" = ? ", new String[] {name},null);
 
-        //get id_smybol_table
-        mCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME1 +
-                " WHERE "+ COL_NAME_SYMBOL +" = ? ", new String[] {name},null);
+            idSymbolList = new ArrayList<String>();
+            mCursor.moveToFirst();
+            while ( !mCursor.isAfterLast() ){
+                idSymbolList.add(mCursor.getString(0));
+                Log.i("get_id_Symbol : ",mCursor.getString(0));
+                mCursor.moveToNext();
 
-        idSymbolList = new ArrayList<String>();
-        mCursor.moveToFirst();
-        while ( !mCursor.isAfterLast() ){
-            idSymbolList.add(mCursor.getString(0));
-            Log.i("get_id_Symbol : ",mCursor.getString(0));
-            mCursor.moveToNext();
+            }
+            mCursor.close();
+            //insert text_table
+            if(idSymbolList.size() == 1){
+                id_symbol = idSymbolList.get(0);
+                if(id_symbol != null){
 
-        }
-        mCursor.close();
-        //insert text_table
-        if(idSymbolList.size() == 1){
-            id_symbol = idSymbolList.get(0);
-            if(id_symbol != null){
+                    int index = 0;
+                    while (index < textList.size()){
+                        Log.i("Textinsert : ",textList.get(index));
+                        db.execSQL("INSERT INTO  "+ TABLE_NAME2 +
+                                " ( "+COL_TEXT+" , "+ COL_ID_SYMBOL +" ) " +
+                                "VALUES ('"+ textList.get(index) +"','"+ id_symbol +"');");
+                        index++;
+                    }
 
-                int index = 0;
-                while (index < textList.size()){
-                    Log.i("Textinsert : ",textList.get(index));
-                    db.execSQL("INSERT INTO  "+ TABLE_NAME2 +
-                           " ( "+COL_TEXT+" , "+ COL_ID_SYMBOL +" ) " +
-                           "VALUES ('"+ textList.get(index) +"','"+ id_symbol +"');");
-                    index++;
                 }
 
             }
+
+        }catch (SQLException e){
+            Log.e("DB Error addData", e.getMessage()+" String :"+e.toString());
 
         }
 
@@ -205,47 +211,56 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
     //getOneValues
     public MyGesture getValues(String id){
         db = this.getReadableDatabase();
+
         MyGesture myGesture = new MyGesture();
-        /*ArrayList<String> textList = new ArrayList<>();
+        ArrayList<String> textList = new ArrayList<>();
 
+        myGesture.setId(id);
         int count = 0 ;
-        Cursor mCursor;
+        try{
+            Cursor mCursor;
+            mCursor = db.rawQuery(
+                    "SELECT * FROM " + TABLE_NAME1 +
+                            " WHERE _id = ? ", new String[] {id},null);
 
-        mCursor = db.rawQuery(
-                "SELECT * FROM " + TABLE_NAME1 +
-                " WHERE _id = ? ", new String[] {id},null);
+            count = mCursor.getCount();
+            Log.e(" count :",""+ count  );
 
-        count = mCursor.getCount();
-        Log.i(" count :",""+ count + "  mCursot"+ mCursor.toString() );
+            if(mCursor != null && count == 1){
+                mCursor.moveToFirst();
+                Log.e("ID",mCursor.getString(mCursor.getColumnIndex("_id")));
 
-        if(mCursor != null && count == 1){
-            myGesture.setId(mCursor.getString(mCursor.getColumnIndex("_id")));
-            myGesture.setGestureName(mCursor.getString(mCursor.getColumnIndex(COL_NAME_SYMBOL)));
-            myGesture.setDetailGesture(mCursor.getString(mCursor.getColumnIndex(COL_DETAIL_SYMBOL)));
-        }else{
+                myGesture.setId(mCursor.getString(mCursor.getColumnIndex("_id")));
+                myGesture.setGestureName(mCursor.getString(mCursor.getColumnIndex(COL_NAME_SYMBOL)));
+                myGesture.setDetailGesture(mCursor.getString(mCursor.getColumnIndex(COL_DETAIL_SYMBOL)));
+            }else{
 
-        }
-        mCursor.close();
-
-        count = 0 ;
-        mCursor = db.rawQuery(
-                "SELECT * FROM " + TABLE_NAME2 +
-                        " WHERE "+ COL_ID_SYMBOL +" = ? ", new String[] {id},null);
-        count = mCursor.getCount();
-        Log.i("Size of Text Table : ",count+"");
-        if(count > -1 ){
-            mCursor.moveToFirst();
-            while ( !mCursor.isAfterLast() ){
-                textList.add(mCursor.getString(1));
-                Log.i("Text : ",mCursor.getString(1));
-                mCursor.moveToNext();
             }
+            mCursor.close();
+
+            count = 0 ;
+            mCursor = db.rawQuery(
+                    "SELECT * FROM " + TABLE_NAME2 +
+                            " WHERE "+ COL_ID_SYMBOL +" = ? ", new String[] {id},null);
+            count = mCursor.getCount();
+            Log.i("Size of Text Table : ",count+"");
+            if(count > -1 ){
+                mCursor.moveToFirst();
+                while ( !mCursor.isAfterLast() ){
+                    textList.add(mCursor.getString(1));
+                    Log.i("Text : ",mCursor.getString(1));
+                    mCursor.moveToNext();
+                }
+            }
+
+
+            myGesture.setTextGesture(textList);
+
+            mCursor.close();
+        }catch (SQLException e){
+            Log.e("DB Error getValues : ", e.toString() );
         }
 
-
-        myGesture.setTextGesture(textList);*/
-
-       // mCursor.close();
         return myGesture;
     }
 
@@ -254,24 +269,40 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
     public ArrayList<MyGesture> getMutiValues(){
         db = this.getReadableDatabase();
         ArrayList<MyGesture> myGestures= new ArrayList<>();
-        Cursor mCursor1 = db.rawQuery("select * from "+TABLE_NAME1 , null);
-        Cursor mCursor2 = db.rawQuery("select * from "+TABLE_NAME2 , null);
-        while(mCursor1.moveToNext()){
-            /*myGestures.add( new MyGesture(
-                    mCursor.getString(
-                            mCursor.getColumnIndex(
-                                    CARS_COLUMN_COLOR)
-                    ),
-                    mCursor.getString(
-                            mCursor.getColumnIndex(
-                                    CARS_COLUMN_NAME)
-                    ),
-                    mCursor.getString(
-                            mCursor.getColumnIndex(
-                                    CARS_COLUMN_PLACE)
-                    )
-            ));*/
+        MyGesture myGesture = new MyGesture();
+        ArrayList<String> textSet = new ArrayList<>();
+        Cursor mCursor1;
+        Cursor mCursor2;
+        try{
+            mCursor1 = db.rawQuery("select * from "+TABLE_NAME1 , null);
+            mCursor1.moveToFirst();
+            while(!mCursor1.isAfterLast()){
+                String symbolId = null;
+                symbolId = mCursor1.getString(mCursor1.getColumnIndex("_id"));
+                if(symbolId != null){
+                    mCursor2 = db.rawQuery("select * from "+TABLE_NAME2+" where "+COL_ID_SYMBOL+" = ?",new String[]{symbolId});
+                    mCursor2.moveToFirst();
+                    while (mCursor2.isAfterLast()){
+                        textSet.add(mCursor2.getString(mCursor2.getColumnIndex(COL_TEXT)));
+                        mCursor2.moveToNext();
+                    }
+                    myGesture.setId(symbolId);
+                    myGesture.setGestureName(mCursor1.getString(mCursor1.getColumnIndex(COL_NAME_SYMBOL)));
+                    myGesture.setDetailGesture(mCursor1.getString(mCursor1.getColumnIndex(COL_DETAIL_SYMBOL)));
+                    myGesture.setTextGesture(textSet);
+                    myGestures.add(myGesture);
+                    mCursor2.close();
+                    symbolId = null;
+                }
+                mCursor1.moveToNext();
 
+            }
+
+            mCursor1.close();
+
+
+        }catch (SQLException e){
+            Log.e("DB Error GetMutiValues",e.toString());
         }
 
         return myGestures;
@@ -279,14 +310,37 @@ public class GesturesDBHelper extends SQLiteOpenHelper {
 
     }
 
+    //Select Data from Table1
+    public Cursor SelectData(){
+        try{
+            db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_NAME1 , null);
+            if(cursor != null){
+                return cursor;
+            }else {
+                return null;
+            }
+        }catch (Exception e){
+            Log.e("DB Error SelectData", e.toString());
+            return null;
+        }
+    }
+
+
     public boolean deleteData(String id) {
         boolean result = false;
         db = this.getWritableDatabase();
+        try{
+            if(id != null){
+                //delete row in symbol table
+                db.execSQL("DELETE FROM "+TABLE_NAME1+" where _id = ? ", new String[] { id });
+                db.execSQL("DELETE FROM "+TABLE_NAME2+" where "+COL_ID_SYMBOL+" = ? ", new String[] { id });
 
-        if(id != null){
-            //delete row in symbol table
-            db.execSQL("DELETE FROM "+TABLE_NAME1+" where _id = ? ", new String[] { id });
-            db.execSQL("DELETE FROM "+TABLE_NAME2+" where "+COL_ID_SYMBOL+" = ? ", new String[] { id });
+                result = true;
+            }
+
+        }catch (SQLException e){
+            Log.e("DB Error Delete",e.toString());
         }
 
         db.close();

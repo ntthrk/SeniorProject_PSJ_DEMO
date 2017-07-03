@@ -67,8 +67,7 @@ public class MEMO_detailFragment extends Fragment {
         deleteBT = (Button) view.findViewById(R.id.delete_BT);
         editBT = (Button) view.findViewById(R.id.edit_BT);
 
-
-        myGesture.getGesture();
+        //myGesture.getGesture();
 
         //dbHelper =  new GesturesDBHelper(getContext());
         gestureManagement = new GestureManagement();
@@ -81,18 +80,10 @@ public class MEMO_detailFragment extends Fragment {
             Log.e("LoadGesture", e.getMessage());
         }
 
-        Log.e("detailFr  : ",idSymbol);
-
         NameSymbolTV.setText(myGesture.getGestureName());
 
-        Bitmap image = myGesture.getGesture().toBitmap(
-                100,
-                100,
-                 12,
-                Color.BLACK);
+        Bitmap image = myGesture.getGesture().toBitmap(100, 100, 12, Color.BLACK);
         SymbolImageIV.setImageBitmap(image);
-
-
 
         symbolDetailTV.setText(myGesture.getDetailGesture());
 
@@ -100,8 +91,26 @@ public class MEMO_detailFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,txtList);
         textListLV.setAdapter(adapter);
 
-
         //deleteRecord(symbolId);
+        deleteBT.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                gestureManagement.deleteGesture(myGesture, getActivity());
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new MEMO_mainFragment()).commit();
+            }
+        });
+
+        editBT.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                gestureManagement.deleteGesture(myGesture, getActivity());
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new MEMO_managementFragment()).commit();
+            }
+        });
+
 
     }
 }

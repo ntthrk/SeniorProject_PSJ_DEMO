@@ -1,10 +1,12 @@
 package com.finalproject.ntthrk_win.psj_demo;
 
 
+import android.database.Cursor;
 import android.gesture.GestureLibrary;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,12 @@ public class MEMO_mainFragment extends Fragment {
     private Spinner searchSN;
     private android.support.v7.widget.SearchView groupTextSearch;
     private static ArrayList<MyGesture> gestureList;
-
     private MEMO_listviewAdapter memoListviewAdapter;
-
     private static ArrayList<MyGesture> myGesturesList;
     private GestureLibrary gestureLibrary;
-    ListView listView;
+    private GesturesDBHelper helper;
+    private ListView listView;
+    private String idSymbol = null;
 
     public MEMO_mainFragment() {
         // Required empty public constructor
@@ -46,21 +48,29 @@ public class MEMO_mainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        helper = new GesturesDBHelper(this.getContext());
         addData= (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.group_add);
         listView = (ListView) view.findViewById(R.id.groupList_view1);
 
         myGesturesList = new ArrayList<>();
+/*
 
         MEMO_listviewAdapter adapter = new MEMO_listviewAdapter(getContext(), myGesturesList);
         listView.setAdapter(adapter);
+*/
 
 
-        //listView.setAdapter(adapter);
+        Cursor cursor = helper.SelectData();
+        Log.e("Cursor Count :", cursor.getCount()+"");
+        listView.setAdapter(new MEMO_listviewAdapter(getContext(), cursor,true));
+
+        idSymbol = cursor.getString(cursor.getColumnIndex("_id"));
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                /*getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new MEMO_detailFragment()).commit();*/
+                idSymbol = null;
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new MEMO_detailFragment(idSymbol)).commit();
             }
         });
 

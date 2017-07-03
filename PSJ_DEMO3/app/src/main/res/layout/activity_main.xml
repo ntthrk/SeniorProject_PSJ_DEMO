@@ -17,7 +17,7 @@
 
         <TextView
             android:onClick="ttsPages"
-            android:text="TTS"
+            android:text="ส่งเสียง"
             android:textColor="@color/menuBar"
             android:gravity="center"
             android:layout_width="0dp"
@@ -26,7 +26,7 @@
 
         <TextView
             android:onClick="sttPages"
-            android:text="STT"
+            android:text="รับข้อความ"
             android:textColor="@color/menuBar"
             android:gravity="center"
             android:layout_width="0dp"
@@ -35,7 +35,7 @@
 
         <TextView
             android:onClick="memoPages"
-            android:text="MEMO"
+            android:text="คลัง"
             android:textColor="@color/menuBar"
             android:gravity="center"
             android:layout_width="0dp"
